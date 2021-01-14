@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jms-config name="jms-conf"
+	xmlns="http://www.gbicc.org/schemas/jms-config/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.gbicc.org/schemas/jms-config/1.0.0 http://www.gbicc.org/schemas/jms-config/1.0.0/jms-config.xsd">
+		<jms-connection-foctory name="long-ems"
+		url="tcp://192.25.105.116:17226,tcp://192.25.105.116:17228" 
+		username="esbuser"
+		password="6dzZaO/KeB0=" 
+		factoryClass="com.tibco.tibjms.TibjmsConnectionFactory"
+		useJNDI="true">
+		<provider-ext-params>
+			<parameter name="ConnAttemptCount" value="10" />
+			<parameter name="ConnAttemptDelay" value="1000" />
+			<parameter name="ReconnAttemptCount" value="10000" />
+			<parameter name="ReconnAttemptDelay" value="1000" />
+		</provider-ext-params>
+		<jndi-config initialContextFactory="com.tibco.tibjms.naming.TibjmsInitialContextFactory"
+			JNDIName="GenericConnectionFactory" />
+	</jms-connection-foctory>
+	<jms-message-consumer name="XYZQ.ESB.TEST.Service.Publish.WebMailTaskQueueService.PublishEmailState.1_0_0Listener"
+		acknowledgeMode="CLIENT_ACKNOWLEDGE" 
+		jms-connection-factory-ref="long-ems"
+		message-listener="com.xyzq.sendmail.ExampleMessageListener"
+		exception-listener="com.xyzq.sendmail.ExampleMessageListener"> 
+		<topic name="XYZQ.ESB.TEST.Service.Publish.WebMailTaskQueueService.PublishEmailState.1_0_0" durableName="subscriber.demo.PublishEmailState" subcribeType="durableSubscribe" noLocal="true" selector="SystemId=99999"/>
+	</jms-message-consumer>
+</jms-config>

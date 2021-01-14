@@ -1,0 +1,13 @@
+/pictures/**
+/logs/*
+**/.DS_Store
+.classpath
+.project
+.settings
+**/*.pyc
+.pydevproject
+*.pyc
+.idea
+*.iml
+target/*
+log/*
